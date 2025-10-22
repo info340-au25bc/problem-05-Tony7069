@@ -73,28 +73,46 @@ huskyGames2016.filter(function(game) {
     UWLostGame.push(game);
   }
 });
-// console.log(UWLostGame);
+console.log(UWLostGame);
 
 //Log out an array of opponents that UW lost to. Hint: Use the `.map()` method 
 //to extract the opponent names!
-
+const opponentLostTo = [];
+UWLostGame.map(function(game) {
+  if (game.home == "UW") {
+    opponentLostTo.push(game.opponent);
+  } else {
+    opponentLostTo.push(game.home);
+  }
+});
+// console.log(opponentLostTo);
 
 //Use a `forEach()` loop to log out each of the games UW lost, each on its own 
 //line, in the following format:
 //    "Rutgers at UW, 13 to 48"
 //You should use an anonymous callback function.
-
+UWLostGame.forEach(function(game) {
+  console.log(game.opponent + " at " + game.home + ", " + game.opponent_score + " to " + game.home_score);
+});
 
 //Use the `filter()` method with an anonymous callback function to get an array
 //of games where UW had at least one fumble.
 //Log out HOW MANY games included fumbles.
-
-
+const fumbleGame = [];
+huskyGames2016.filter(function(game) {
+  if (game.fumbles > 0) fumbleGame.push(game); 
+});
+console.log(fumbleGame.length);
+ 
 //Define a function `mostYardsPassing()` that takes in two "game" objects and
 //returns the game that has a greater number of passing yards.
 //Your function should handle the case where the _first_ game has no 
 //`passing_yards` property, in which case it should return the second game.
-
+function mostYardsPassing(game1, game2 ) {
+  if (!game1.passing_yards) return game2;
+  if (game1.passing_yards > game2.passing_yards) return game1;
+  return game2;
+}
 
 //Create a variable `mostPassingGame` that refers to the "game" that had the most
 //passing yards in the season. Use the `reduce()` method with `mostYardsPassing()`
@@ -104,7 +122,8 @@ huskyGames2016.filter(function(game) {
 // - Consider: why do this with `reduce()` instead of `filter()`?
 //
 //Log out the game with the most passing yards.
-
+const mostPassingGame = huskyGames2016.reduce(mostYardsPassing, {});
+console.log(mostPassingGame);
 
 
 //It would be useful to be able to apply multiple "filter criteria" to an array
@@ -115,7 +134,12 @@ huskyGames2016.filter(function(game) {
 //game object and returns the result of passing that object to both of the 
 //callback functions and "anding" (&&) the results. The `makeCombinedFilter()` 
 //function should then return this new function.
-
+function makeCombinedFilter(standard1, standard2) {
+  function combinedFilter(game) {
+    return standard1(game) && standard2(game);
+  }
+  return combinedFilter;
+}
 
 //Create a variable `fumbledAndLostFilter` which is the result of calling the 
 //`makeCombinedFilter()` function and passing two callback functions: 
@@ -123,12 +147,16 @@ huskyGames2016.filter(function(game) {
 //one for filtering for games with fumbles (this can be a named or an anonymous
 //callback like you used earlier).
 //Note that `fumbledAndLostFilter` _is_ a function!
-
+const fumbledAndLostFilter = makeCombinedFilter(huskiesLost, function(game) {
+  if (game.fumbles > 0) return true;
+  return false;
+});
 
 //Create an array of games that UW lost with fumbles. Use the 
 //`fumbledAndLostFilter()` function as a callback to the `filter()` method.
 //Log out the array of games lost with fumbles.
-
+const gamesLostAndFunbles = huskyGames2016.filter(fumbledAndLostFilter);
+console.log(gamesLostAndFunbles);
 
 
 //OPTIONAL extra practice: create a variable `avgScoreDifference` that

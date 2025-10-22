@@ -43,10 +43,12 @@ function compoundInterest(initialBalance, interestRate, years) {
    number. For numbers which are multiples of both three and five, the array 
    should contain "FizzBuzz" instead of the number.
    The returned array should be empty for arguments less than 1. */
-function fizzbuzz(number) {
+function fizzBuzz(number) {
   const resultArray = [];
   for (let i = 1; i <= number; i++) {
-    if (i % 3 == 0) {
+    if (i % 15 == 0) {
+      resultArray.push("FizzBuzz");
+    } else if (i % 3 == 0) {
       resultArray[i - 1] = "Fizz";
     } else if (i % 5 == 0) {
       resultArray[i - 1] = "Buzz";
@@ -57,7 +59,7 @@ function fizzbuzz(number) {
   return resultArray;
 }
 
-// console.log(fizzbuzz(10));
+// console.log(fizzBuzz(10));
    
 
 /* Define a function `getLetterFrequencies()` that takes in a single string as 
@@ -115,7 +117,7 @@ for (let i = 0; i < allSuits.length; i++) {
 
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
-const hand = [deck[0], deck[1], deck[2], deck[3], {suit: "diamonds", rank: 12}];
+// const hand = [deck[0], deck[1], deck[2], deck[3], {suit: "diamonds", rank: 12}];
 
 /* Define a function `containsQueenOfHearts()` that takes in an array of "card"
    objects (e.g., a Poker hand) and returns whether or not the Queen of Hearts
@@ -137,7 +139,7 @@ function containsQueenOfHearts(cards) {
 function getHighCard(cards) {
   let max = 0;
   for (let i = 0; i < cards.length; i++) {
-    if (cards[i].rank > 0) max = cards[i].rank;
+    if (cards[i].rank > max) max = cards[i].rank;
   }
   for (let i = 0; i < cards.length; i++) {
     if (cards[i].rank == max) return cards[i];
@@ -164,18 +166,18 @@ function isFlush(cards) {
    cards with the same _rank_) in the array.
    Double challenge: return the rank of the pair of cards with the highest rank 
    (e.g., if the hand contains more than one pair!) */
-function hasPair(cards) {
-  let highestPairRank = 0;
-  for (let i = 0; i < cards.length; i++) {
-    for (let j = i + 1; j < cards.length; j++) {
-      if (cards[i].rank == cards[j].rank && cards[i].rank > highestPairRank) {
-        highestPairRank = cards[i].rank;
-      }
-    }
-  }
-  if (highestPairRank > 0) return highestPairRank;
-  return false;
-}
+// function hasPair(cards) {
+//   let highestPairRank = 0;
+//   for (let i = 0; i < cards.length; i++) {
+//     for (let j = i + 1; j < cards.length; j++) {
+//       if (cards[i].rank == cards[j].rank && cards[i].rank > highestPairRank) {
+//         highestPairRank = cards[i].rank;
+//       }
+//     }
+//   }
+//   if (highestPairRank > 0) return highestPairRank;
+//   return false;
+// }
 
 
 
