@@ -12,6 +12,7 @@ console.log(motto);
 //Use the `.length` property
 //Log out the length.
 const mottoLength = motto.length;
+console.log(mottoLength);
 
 //Use the `indexOf()` String method to see if the word "cool" is in the string.
 //See http://www.w3schools.com/jsref/jsref_obj_string.asp for String methods
@@ -33,8 +34,8 @@ console.log(motto);
 //the old (which you had saved in a variable!). Log out this ratio as a 
 //percentage with two decimal places of precision (e.g., `"123.45%"`).
 //You can use the `.toFixed()` Number method to specify the precision. 
-console.log((motto.length * 100 / mottoLength).toFixed(2) + "%");
-
+const ratio = (motto.length * 100 / mottoLength).toFixed(2) + "%";
+console.log(ratio);
 
 /** Arrays **/
 
@@ -58,7 +59,7 @@ console.log(numbers);
 //Hint: sort() the array, then access the middle index of the sorted values.
 //You can use the `Math.floor()` function to round to a whole number.
 //Log out the median value.
-numbers.sort();
+numbers.sort(function(a, b) { return a - b });
 const index = Math.floor(numbers.length / 2);
 console.log(numbers[index]);
 
