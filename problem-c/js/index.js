@@ -54,15 +54,17 @@ huskyGames2016.map(function(game) {
   const opponent = extractOpponent(game);
   opponents.push(opponent);
 });
-// console.log(opponents);
+console.log(opponents);
 
 
 //Define a function `huskiesLost()` that takes in a "game" object and returns
 //whether or not UW lost.
 function huskiesLost(game) {
-  if (game.opponent_score < game.home_score) return true;
+  if (game.home == "UW" && game.home_score < game.opponent_score) return true;
+  if (game.opponent == "UW" && game.opponent_score < game.home_score) return true;
   return false;
 }
+
 
 //Use the `filter()` method to create an array of games that UW lost (a smaller
 //array than the games they won!)
@@ -85,7 +87,7 @@ UWLostGame.map(function(game) {
     opponentLostTo.push(game.home);
   }
 });
-// console.log(opponentLostTo);
+console.log(opponentLostTo);
 
 //Use a `forEach()` loop to log out each of the games UW lost, each on its own 
 //line, in the following format:
